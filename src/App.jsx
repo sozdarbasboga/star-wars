@@ -6,10 +6,10 @@ import StarshipDetail from './components/StarshipDetail';
 import './App.css';
 
 function App() {
-  const [starships, setStarships] = useState([]);
+  const [allStarships, setAllStarships] = useState([]); // Tüm gemiler
+  const [filteredStarships, setFilteredStarships] = useState([]); // Filtrelenmiş gemiler
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [selectedStarshipId, setSelectedStarshipId] = useState(null);
 
@@ -17,17 +17,13 @@ function App() {
     fetchStarships();
   }, []);
 
-  const fetchStarships = async (query = '') => {
+  const fetchStarships = async () => {
     try {
       setLoading(true);
       setError(null);
-      let data;
-      if (query) {
-        data = await starWarsApi.searchStarships(query);
-      } else {
-        data = await starWarsApi.getStarships(1);
-      }
-      setStarships(data.results);
+      const data = await starWarsApi.getStarships(1);
+      setAllStarships(data.results);
+      setFilteredStarships(data.results); // İlk yüklemede tüm gemileri göster
     } catch (err) {
       setError('Yıldız gemileri yüklenirken hata oluştu');
     } finally {
@@ -36,8 +32,17 @@ function App() {
   };
 
   const handleSearch = (query) => {
-    setSearchQuery(query);
-    fetchStarships(query);
+    if (!query.trim()) {
+      // Boş arama ise tüm gemileri göster
+      setFilteredStarships(allStarships);
+    } else {
+      // Arama yapılıyorsa filtrele
+      const filtered = allStarships.filter(starship => 
+        starship.name.toLowerCase().includes(query.toLowerCase()) ||
+        (starship.model && starship.model.toLowerCase().includes(query.toLowerCase()))
+      );
+      setFilteredStarships(filtered);
+    }
   };
 
   return (
@@ -54,7 +59,7 @@ function App() {
                 type="text"
                 placeholder="Name / Model"
                 className="custom-search-input"
-                value={searchValue || ''}
+                value={searchValue}
                 onChange={e => setSearchValue(e.target.value)}
               />
               <button type="submit" className="custom-search-button">Filter</button>
@@ -73,8 +78,13 @@ function App() {
           <>
             {error && <div className="error-message">{error}</div>}
             {loading && <div className="loading-message">Yükleniyor...</div>}
+            {filteredStarships.length === 0 && !loading && searchValue && (
+              <div className="no-results">
+                "{searchValue}" için sonuç bulunamadı
+              </div>
+            )}
             <div className="starships-grid">
-              {starships.map((starship, index) => (
+              {filteredStarships.map((starship, index) => (
                 <StarshipCard
                   key={`${starship.name}-${index}`}
                   starship={starship}

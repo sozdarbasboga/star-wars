@@ -10,9 +10,28 @@ export const starWarsApi = {
       }
       const data = await response.json();
       
-      // Yeni API yapısına göre veriyi dönüştür
+      // Her gemi için detay bilgilerini al
+      const detailedResults = await Promise.all(
+        data.results.map(async (starship) => {
+          try {
+            const detailResponse = await fetch(starship.url);
+            if (detailResponse.ok) {
+              const detailData = await detailResponse.json();
+              return {
+                ...starship,
+                ...detailData.result.properties
+              };
+            }
+            return starship;
+          } catch (error) {
+            console.error(`Gemi detayı alınamadı: ${starship.name}`, error);
+            return starship;
+          }
+        })
+      );
+      
       return {
-        results: data.results,
+        results: detailedResults,
         next: data.next,
         previous: data.previous,
         count: data.total_records
