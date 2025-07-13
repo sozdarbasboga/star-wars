@@ -95,24 +95,26 @@ const StarshipDetail = ({ starshipId, onBack }) => {
         </svg>
       </button>
       <div className="starship-detail-card">
-        <h2 className="starship-detail-title">{starship.name}</h2>
-        <div className="starship-model-section">
-          <span className="starship-model-name">{starship.model}</span>
-          <div className="starship-model-underline"></div>
-        </div>
-        <img
-          className="starship-detail-image"
-          src={"/images.jpeg"}
-          alt={starship.name}
-        />
-        <div className="starship-detail-info">
-          <div><b>Model:</b> {formatValue(starship.model)}</div>
-          <div><b>Hyperdrive Rating:</b> {formatValue(starship.hyperdrive_rating)}</div>
-          <div><b>Passengers:</b> {formatValue(starship.passengers)}</div>
-          <div><b>Max Atmosphering Speed:</b> {formatValue(starship.max_atmosphering_speed)}</div>
-          <div><b>Manufacturer:</b> {formatValue(starship.manufacturer)}</div>
-          <div><b>Crew:</b> {formatValue(starship.crew)}</div>
-          <div><b>Cargo Capacity:</b> {formatValue(starship.cargo_capacity)}</div>
+        <div className="starship-detail-inner-card">
+          <h2 className="starship-detail-title">{starship.name}</h2>
+          <div className="starship-model-section">
+            <span className="starship-model-name">{starship.model}</span>
+            <div className="starship-model-underline"></div>
+          </div>
+          <img
+            className="starship-detail-image"
+            src={"/images.jpeg"}
+            alt={starship.name}
+          />
+          <div className="starship-detail-info">
+            <div><b>Model:</b> {formatValue(starship.model)}</div>
+            <div><b>Hyperdrive Rating:</b> {formatValue(starship.hyperdrive_rating)}</div>
+            <div><b>Passengers:</b> {formatValue(starship.passengers)}</div>
+            <div><b>Max Atmosphering Speed:</b> {formatValue(starship.max_atmosphering_speed)}</div>
+            <div><b>Manufacturer:</b> {formatValue(starship.manufacturer)}</div>
+            <div><b>Crew:</b> {formatValue(starship.crew)}</div>
+            <div><b>Cargo Capacity:</b> {formatValue(starship.cargo_capacity)}</div>
+          </div>
         </div>
       </div>
     </div>
