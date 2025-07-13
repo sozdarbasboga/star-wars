@@ -46,7 +46,7 @@ function App() {
         <header className="app-header">
           <div className="header-content">
             <div className="logo-section">
-              <img src="public/starwars-title.png" alt="Star Wars" className="starwars-title-img" />
+              <img src="/starwars-title.png" alt="Star Wars" className="starwars-title-img" />
             </div>
             <form className="custom-search-bar" onSubmit={e => { e.preventDefault(); handleSearch(searchValue); }}>
               <span className="custom-search-label">Name / Model</span>
