@@ -96,7 +96,6 @@ const StarshipDetail = ({ starshipId, onBack }) => {
       </button>
       <div className="starship-detail-card">
         <div className="starship-detail-inner-card">
-          <h2 className="starship-detail-title">{starship.name}</h2>
           <div className="starship-model-section">
             <span className="starship-model-name">{starship.model}</span>
             <div className="starship-model-underline"></div>
