@@ -1,6 +1,6 @@
 # Star Wars Yıldız Gemileri Uygulaması
 
-Bu proje, [Star Wars API (swapi.tech)](https://swapi.tech/) üzerinden yıldız gemilerini modern ve tematik bir arayüzle listeleyen, arama yapabilen ve detaylarını gösterebilen bir React uygulamasıdır.
+Bu proje, [Star Wars API (swapi.tech)](https://sozdar-starwars.netlify.app) üzerinden yıldız gemilerini modern ve tematik bir arayüzle listeleyen, arama yapabilen ve detaylarını gösterebilen bir React uygulamasıdır.
 
 ## Özellikler
 
